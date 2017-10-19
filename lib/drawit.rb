@@ -4,8 +4,8 @@ require_relative 'user_interface'
 
 user_interface = UserInterface.new
 
-# quit = false
+app_running = true
 
-until quit
-  quit = true if user_interface.get_user_command == ["Q"] 
+while app_running
+  app_running = false if user_interface.get_user_command == ["Q"] 
 end
