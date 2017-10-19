@@ -2,6 +2,10 @@
 
 require_relative 'user_interface'
 
-user_interface = new.UserInterface
+user_interface = UserInterface.new
 
-user_interface.get_user_command
+# quit = false
+
+until quit
+  quit = true if user_interface.get_user_command == ["Q"] 
+end
