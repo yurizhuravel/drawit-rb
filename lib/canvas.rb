@@ -1,34 +1,42 @@
 require 'Matrix'
 
+BORDERS = 2*1
+
 class Canvas
     attr_reader :width,
-                :height,
-                :current_canvas
+                :height
+
+    attr_accessor :current_canvas
   
     def initialize(width, height)
       @width = width
       @height = height
       
-        @current_canvas = Array.new (height) {Array.new(width) {' '}}
+        @current_canvas = Array.new (height+BORDERS) {Array.new(width+BORDERS) {' '}}
     end
 
-    def add_border
-       vertical = @current_canvas.transpose
+    def draw_border
+    @current_canvas = @current_canvas.transpose
 
-       vertical.first.map! { | e | '|'}
-       vertical.last.map! { | e | '|'}
+    @current_canvas.first.map! { | e | '|'}
+    @current_canvas.last.map! { | e | '|'}
 
-       canvas = vertical.transpose
+    @current_canvas = @current_canvas.transpose
+
+    @current_canvas.first.map! { | e | '-'}
+    @current_canvas.last.map! { | e | '-'}
        
-       canvas.first.map! { | e | '-'}
-       canvas.last.map! { | e | '-'}
-       
-       canvas.each do |r|
-            puts r.each { |p| p }.join("")
+    end
+
+    def display_canvas 
+        @current_canvas.each do |row|
+            puts row.each { |cell| cell }.join("")
         end
-    end
+    end    
 end
 
 c = Canvas.new(30, 10)
 
-c.add_border
+c.draw_border
+
+c.display_canvas

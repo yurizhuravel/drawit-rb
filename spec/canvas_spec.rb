@@ -5,16 +5,15 @@ describe Canvas do
   let(:height) {5}
   subject(:canvas) {described_class.new width, height}
 
-  context 'a new Canvas' do
-    it "has width and height" do
-      expect(canvas.current_canvas.column_size).to eq(5)
-      expect(canvas.current_canvas.row_size).to eq(20)
-    end
+  it "has width and height" do
+      expect(canvas.current_canvas[0].length).to eq(22)
+      expect(canvas.current_canvas.length).to eq(7)
+  end
 
-    it "has a border" do
-      
-    end
-
+  it "can have a border" do
+      canvas.draw_border
+      expect(canvas.current_canvas[0][0]).to eq('-')
+      expect(canvas.current_canvas[1][0]).to eq('|')
   end
 
 end
